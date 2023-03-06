@@ -15,7 +15,10 @@
         "spatie/cpu-load-health-check": "^1.0",
         "spatie/laravel-health": "^1.7",
         "spatie/laravel-honeypot": "^4.1",
-        "victord11/ssl-certification-health-check": "^1.0"
+        "victord11/ssl-certification-health-check": "^1.0",
+        "ext-http": "*",
+        "ext-json": "*",
+      "ext-libsodium": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

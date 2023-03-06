@@ -14,7 +14,7 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        return [
+        return [//
             'title'       => $this->faker->sentence(1),
             'icon'        => $this->faker->randomElement(['la-home', 'la-pencil', 'la-globe', 'la-book-open', 'la-dumbbell']),
             'interest_id' => $this->faker->randomElement(Interest::all()->pluck('id')),

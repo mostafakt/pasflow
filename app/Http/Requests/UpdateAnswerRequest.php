@@ -24,7 +24,12 @@ class UpdateAnswerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+
+            'text' => 'required|string',
+            'user_id' => 'required',
+            'question_id' => 'required',
+
         ];
     }
 }

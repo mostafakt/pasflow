@@ -24,7 +24,13 @@ class StoreFileRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'size' => 'required|max:500000|numeric',
+            'name' => 'required|string',
+            'hash' => 'required|string',
+            'type' => 'required|string',
+            'extension' => 'required|string',
+            'path' => 'required|string',
         ];
     }
 }

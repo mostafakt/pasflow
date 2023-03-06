@@ -18,3 +18,4 @@ use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 
 Route::get('/collections', [CollectionsController::class, 'index']);
 Route::get('health', HealthCheckResultsController::class);
+Route::get('/comments', [CommentController::class, 'index'])

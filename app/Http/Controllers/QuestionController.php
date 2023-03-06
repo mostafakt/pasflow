@@ -2,129 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexRequest;
+use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
+use App\Http\Resources\Questions\Collection\QuestionResourceCollection;
+use App\Http\Resources\Questions\Item\QuestionResource;
 use App\Models\Question;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        $questions = Question::query()->orderByDesc('created_at')->with('user')->withCount(['answers', 'views', 'votes']);
-        return $this->paginate($questions);
+        parent::__construct('questions', QuestionResourceCollection::class, QuestionResource::class, Question::class);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getRequests(): array
     {
-        //
+        $requests = [];
+        $requests['index'] = IndexRequest::class;
+        $requests['store'] = StoreQuestionRequest::class;
+        $requests['update'] = UpdateQuestionRequest::class;
+        $requests['show'] = Request::class;
+        $requests['destroy'] = Request::class;
+        return $requests;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \App\Http\Requests\StoreQuestionRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreQuestionRequest $request)
+    public function setExtraFields($model)
     {
-        $question = new Question($request->all());
-        $question->user_id = Auth::id();
-        $question->save();
-
-        return $this->response($question);
+        $model->user_id = Auth::id();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Question $question
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Question $question)
+    public function fillterByIntid($quer, $value)
     {
-        if ($question == null) {
-            return $this->response404();
-        }
-
-        $question->views()->syncWithoutDetaching([Auth::id() => ["updated_at" => date('Y-m-d')]]);
-        $question->views = $question->views()->count();
-        $question->push();
-
-        return $this->response($question->load([
-            'user',
-            'answers',
-            'answers.comments',
-            'answers.comments.user',
-            'answers.user',
-        ]));
+        return $quer->whereHas('category', function (Builder $query) use ($value) {
+            $query->where('interest_id', '=', $value);
+        });
     }
 
-    public function vote(Question $question)
+    public function custumFileters($query, $request)
     {
-        if ($question == null) {
-            return $this->response404();
-        }
-
-        $question->votes()->syncWithoutDetaching([Auth::id() => ["updated_at" => date('Y-m-d')]]);
-        $question->votes = $question->votes()->count();
-        $question->push();
-
-        return $this->response($question->load([
-            'user',
-            'answers',
-            'answers.comments',
-            'answers.comments.user',
-            'answers.user',
-        ]));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Question $question
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Question $question)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \App\Http\Requests\UpdateQuestionRequest $request
-     * @param \App\Models\Question $question
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateQuestionRequest $request, Question $question)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Question $question
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Question $question)
-    {
-        //
+        if ($request->input('interest_id', null) != null)
+            return $this->fillterByIntid($query, $request->input('interest_id', null));
+        return $query;
     }
 }

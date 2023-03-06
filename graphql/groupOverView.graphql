@@ -1,0 +1,19 @@
+query test {
+#    teacher card inf
+    teacher(id: 1){
+        photo,
+        title,
+        user{
+            firstname,lastname,
+        }
+    }
+    #  activities cards inf
+    activitiesFromProgram(programId: 1,page:1, first:10){
+        data{activity_type_name,title,start_datetime},
+    }
+
+#    students tapel
+newStudentsFromProgram(programId: 1,first: 10 ,){data{student_firstname, student_lastname, }}
+
+
+}

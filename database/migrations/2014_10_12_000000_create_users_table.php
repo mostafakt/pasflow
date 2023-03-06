@@ -13,25 +13,30 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('position');
-            $table->string('address');
-            $table->longText('bio')->nullable();
-            $table->foreignId('avatar_id')->nullable();
+        if (!Schema::hasTable('users'))
+            Schema::create('users', function (Blueprint $table) {
+                $table->id();
+                $table->string('first_name');
+                $table->string('last_name');
+                $table->string('position');
+                $table->string('address');
+                $table->longText('bio')->nullable();
+                $table->foreignId('avatar_id')->nullable();
 
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+                $table->string('email')->unique();
+                $table->timestamp('email_verified_at')->nullable();
+                $table->string('password');
+                $table->rememberToken();
+                $table->foreignId('rule_id');
 
-            // TODO: Skills
-            // TODO: Certificates
-            $table->foreign('avatar_id')->on('files')->references('id');
-        });
+                $table->timestamps();
+
+
+                // TODO: Skills
+                // TODO: Certificates
+                $table->foreign('F')->on('rules')->references('id');
+                $table->foreign('avatar_id')->on('files')->references('id');
+            });
     }
 
     /**

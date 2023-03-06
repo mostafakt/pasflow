@@ -24,6 +24,7 @@ class StoreCommentRequest extends FormRequest
     public function rules()
     {
         return [
+
             //
         ];
     }

@@ -35,6 +35,10 @@ class CreateQuestionsTable extends Migration
             $table->foreign('category_id')->on('categories')->references('id');
             $table->foreign('user_id')->on('users')->references('id');
         });
+
+        Schema::table('questions', function ($table) {
+            $table->integer('level')->default(0);
+        });
     }
 
     /**

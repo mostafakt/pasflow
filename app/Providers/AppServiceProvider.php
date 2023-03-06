@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(FakerGenerator::class, function () {
             return FakerFactory::create('en_GB');
         });
-
     }
 
     /**
@@ -53,5 +52,7 @@ class AppServiceProvider extends ServiceProvider
             ScheduleCheck::new(),
             SslCertificationExpiredCheck::new()->url('google.com')->warnWhenSslCertificationExpiringDay(24)->failWhenSslCertificationExpiringDay(14),
         ]);
+
     }
+
 }

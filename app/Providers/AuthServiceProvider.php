@@ -13,7 +13,14 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\Model' => 'App\Policies\ModelPolicy',
+       // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Answer' => 'App\Policies\AnswerPolicy',
+        'App\Models\Category' => 'App\Policies\CategoryPolicy',
+        'App\Models\Comment' => 'App\Policies\CommentPolicy',
+        'App\Models\File' => 'App\Policies\FilePolicy',
+        'App\Models\Interest' => 'App\Policies\InterestPolicy',
+        'App\Models\Quiz' => 'App\Policies\QuizPolicy',
+        'App\Models\Question' => 'App\Policies\QuestionPolicy',
     ];
 
     /**
@@ -24,9 +31,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        if (!$this->app->routesAreCached()) {
-            Passport::routes();
-        }
+//
+//        if (!$this->app->routesAreCached()) {
+//            Passport::routes();
+//        }
     }
 }

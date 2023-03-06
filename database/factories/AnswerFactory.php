@@ -15,7 +15,7 @@ class AnswerFactory extends Factory
      */
     public function definition()
     {
-        return [
+        return [//
             'text'        => $this->faker->sentence($this->faker->numberBetween(25, 50)),
             'votes'       => $this->faker->numberBetween(-10, 25),
             'accepted'    => $this->faker->boolean(),

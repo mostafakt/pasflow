@@ -15,7 +15,7 @@ class QuestionFactory extends Factory
      */
     public function definition()
     {
-        return [
+        return [//
             'title'       => $this->faker->sentence($this->faker->numberBetween(5, 15)),
             'details'     => $this->faker->sentence($this->faker->numberBetween(25, 60)),
             'votes'       => $this->faker->numberBetween(-10, 25),

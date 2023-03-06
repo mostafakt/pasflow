@@ -13,7 +13,9 @@ class CreateQuestionVoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_vote', function (Blueprint $table) {
+        if (!Schema::hasTable('question_vote'))
+
+            Schema::create('question_vote', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('question_id');

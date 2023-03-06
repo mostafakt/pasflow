@@ -2,90 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexRequest;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Resources\Comments\Collection\CommentsResourceCollection;
+use App\Http\Resources\Comments\Item\CommentsResource;
 use App\Models\Comment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CommentController extends Controller
+class CommentController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        parent::__construct('comments', CommentsResourceCollection::class, CommentsResource::class, Comment::class);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getRequests(): array
     {
-        //
+        $requests = [];
+        $requests['index'] = IndexRequest::class;
+        $requests['store'] = StoreCommentRequest::class;
+        $requests['update'] = UpdateCommentRequest::class;
+        $requests['show'] = Request::class;
+        $requests['destroy'] = Request::class;
+        return $requests;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \App\Http\Requests\StoreCommentRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCommentRequest $request)
+    public function setExtraFields($model)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Comment $comment
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Comment $comment
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \App\Http\Requests\UpdateCommentRequest $request
-     * @param \App\Models\Comment                     $comment
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCommentRequest $request, Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Comment $comment
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comment $comment)
-    {
-        //
+        $model->user_id = Auth::id();
     }
 }

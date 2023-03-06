@@ -6,96 +6,34 @@ use App\Models\Answer;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AnswerPolicy
+class AnswerPolicy extends ApiPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param \App\Models\User $user
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
+    public function getFullArrays(): array
     {
-        //
+        $arrays = [];
+        $arrays['view'] = ['admin', 'user'];
+        $arrays['viewAny'] = ['admin', 'user'];
+        $arrays['update'] = ['admin'];
+        $arrays['create'] = ['admin', 'teacher', 'user'];
+        $arrays['delete'] = ['admin'];
+        $arrays['restore'] = ['admin'];
+
+        return $arrays;
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Answer $answer
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, Answer $answer)
+    public function getPartArrays(): array
     {
-        //
-    }
+        $arrays = [];
+        $arrays['view'] = ['teacher'];
+        $arrays['viewAny'] = ['teacher'];
+        $arrays['update'] = ['teacher', 'user'];
+        $arrays['create'] = [];
+        $arrays['delete'] = ['user', 'teacher'];
+        $arrays['restore'] = ['admin'];
+        $arrays['field'] = ['user_id'];
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param \App\Models\User $user
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Answer $answer
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function update(User $user, Answer $answer)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Answer $answer
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, Answer $answer)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Answer $answer
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Answer $answer)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param \App\Models\User   $user
-     * @param \App\Models\Answer $answer
-     *
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Answer $answer)
-    {
-        //
+        return $arrays;
     }
 }

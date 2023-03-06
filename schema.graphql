@@ -1,0 +1,1625 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+"""
+
+###
+## ##
+##   ##
+##     ##
+#########
+##     ##
+##     ##
+"""
+type Activity {
+    activity_type_id: Int!
+    activity_type_name: String
+    attendance: [StudentAttendanceType!]
+    description: String!
+    end_datetime: DateTime
+    id: ID!
+    lecture: Lecture
+    link: String
+    problems_amount: Int
+    resources: [Resource]
+    resources_amount: Int
+    start_datetime: DateTime
+    title: String!
+}
+
+"A paginated list of Activity items."
+type ActivityPaginator {
+    "A list of Activity items."
+    data: [Activity!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type ActivityType {
+    id: ID!
+    name: String!
+}
+
+type AdminType {
+    id: Int!
+    name: String!
+}
+
+"""
+
+########
+##     ##
+##     ##
+##     ##
+##     ##
+##     ##
+########
+"""
+type Division {
+    id: Int!
+    league_id: Int!
+    name: String!
+}
+
+"""
+
+######
+##    ##
+##
+##   ####
+##    ##
+##    ##
+######
+"""
+type GeneralActivity {
+    general_activity_type: GeneralActivityType
+    general_activity_type_id: ID!
+    id: ID!
+    link: String!
+    modules: [Module]!
+    name: String!
+    resources_count: Int
+    speaker: String
+    start_datetime: DateTime!
+    type: String!
+}
+
+"A paginated list of GeneralActivity items."
+type GeneralActivityPaginator {
+    "A list of GeneralActivity items."
+    data: [GeneralActivity!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type GeneralActivityType {
+    id: ID!
+    name: String!
+}
+
+type Guardian {
+    address_line1: String
+    address_line2: String
+    city: String
+    country: String
+    id: ID!
+    payment_method: PaymentMethod
+    payment_methods: [PaymentMethod]
+    payment_type: PaymentType
+    payment_type_id: Int
+    payments: [Payment]
+    phone_number: String
+    place_residence: String
+    post_code: String
+    subscriptions: [SubscriptionModel]
+    user: User!
+}
+
+type GuardianListType {
+    guadian_payment_type_id: Int
+    guardian_email: String!
+    guardian_firstname: String!
+    guardian_lastname: String!
+    guardian_phone_number: String
+    id: ID!
+    subscription_id: Int
+    subscription_starts_at: DateTime
+    subscription_status_id: Int!
+    subscription_status_name: String!
+}
+
+type GuardianOverview {
+    paidSubscriptions: Int
+    totalSubscriptions: Int
+    unpaidSubscriptions: Int
+    waitingSubscriptions: Int
+}
+
+"A paginated list of Guardian items."
+type GuardianPaginator {
+    "A list of Guardian items."
+    data: [Guardian!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type GuardianType {
+    id: Int!
+    user: User!
+}
+
+"""
+
+##
+##
+##
+##
+##
+##
+########
+"""
+type League {
+    divisions: [Division!]
+    id: Int!
+    name: String!
+    program_id: Int!
+    subjects: [Subject!]
+}
+
+type LearningTrack {
+    description: String!
+    id: Int!
+    name: String!
+}
+
+type LearningTrackActivity {
+    activity_type_id: Int!
+    activity_type_name: String
+    description: String
+    id: Int!
+    learningTrackClass: LearningTrackClass!
+    name: String!
+}
+
+type LearningTrackClass {
+    id: Int!
+    learningTrackActivities: [LearningTrackActivity]
+    learningTrackModule: LearningTrackModule!
+    name: String!
+}
+
+"A paginated list of LearningTrackClass items."
+type LearningTrackClassPaginator {
+    "A list of LearningTrackClass items."
+    data: [LearningTrackClass!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type LearningTrackLeague {
+    id: Int!
+    learningTrack: LearningTrack
+    modules: [LearningTrackModule]
+    name: String!
+}
+
+type LearningTrackModule {
+    id: Int!
+    learningTrackClasses: [LearningTrackClass]
+    learningTrackLeague: LearningTrackLeague
+    name: String!
+}
+
+"A paginated list of LearningTrack items."
+type LearningTrackPaginator {
+    "A list of LearningTrack items."
+    data: [LearningTrack!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+"""
+
+##      ##
+##  ##  ##
+##  ##  ##
+##  ##  ##
+##  ##  ##
+##  ##  ##
+###  ###
+"""
+type Lecture {
+    activities: [Activity]
+    id: ID!
+    module_id: Int
+    name: String!
+}
+
+type Member {
+    id: ID!
+    memberable_data: String
+    memberable_id: ID!
+    memberable_type: String!
+}
+
+"""
+
+##     ##
+###   ###
+#### ####
+## ### ##
+##     ##
+##     ##
+##     ##
+"""
+type Module {
+    contests_count: Int
+    division: Division
+    division_id: ID
+    end_datetime: DateTime
+    final_chalenge_count: Int
+    general_activities: [GeneralActivity]!
+    id: ID!
+    lecture_day: String
+    lecture_endtime: Int
+    lecture_starttime: Int
+    lectures: [Lecture]
+    name: String
+    placement: Int
+    practices_count: Int
+    program: Program!
+    program_id: ID
+    progress: Int
+    reminingDays: Int
+    start_datetime: DateTime
+    subject: Subject
+    subject_id: ID
+    teacher: Teacher
+    teacher_id: ID
+    upcomming_activities: [Activity]
+}
+
+"A paginated list of Module items."
+type ModulePaginator {
+    "A list of Module items."
+    data: [Module!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type Mutation {
+    addGeneralActivityToModule(general_activity_id: Int!, module_id: Int!): GeneralActivity
+    addLearningTrackActivityToLearningTrackClass(activity_type_id: Int!, description: String, learning_track_class_id: Int!, name: String): LearningTrackClass!
+    addLearningTrackClassToLearningTrackModule(learning_track_module_id: Int!, name: String): LearningTrackModule!
+    addLinkToGroupSessionActivity(activity_id: Int!, link: String!): Activity
+    addResourceToActivity(activity_id: Int!, resource_id: Int!): Activity
+    addStudentToModule(module_id: ID!, student_id: ID!): Module
+    cancelSubscription(comments: String!, id: ID!): SubscriptionModel
+    confirmReceipt(payment_id: ID!): Payment
+    createLearningTrack(description: String, divisions_number: Int!, leagues_number: Int!, modules_number: Int!, name: String!): LearningTrack
+    createModule(assignedStudents: [Int]!, division_id: ID!, end_datetime: String!, lecture_day: String!, lecture_endtime: String, lecture_starttime: String, name: String!, program_id: ID!, start_datetime: String!, subject_id: ID!, teacher_id: ID!): Module
+    createNewActivity(activity_type_id: Int!, description: String, end_datetime: DateTime!, lecture_id: Int!, link: String, resource_ids: [Int], start_datetime: DateTime!, title: String!): Activity
+    createProblemCQ(description: String, difficulty: Int, languages: [LanguageTranslationInput], memory_limit: Int!, sample_tests: [TestCaseInput], tag_ids: [Int], test_cases: [TestCaseInput], time_limit: Int!, title: String!, type_id: Int!, writer: String): Problem
+    createProblemFRQ(correct_answer: String!, description: String, difficulty: Int, languages: [LanguageTranslationInput], question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    createProblemMCQ(answers: [String!]!, correct_answer: [Boolean!]!, description: String, difficulty: Int, languages: [LanguageTranslationInput], question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    createProblemNQ(correct_answer: Float!, description: String, difficulty: Int, languages: [LanguageTranslationInput], precision: Int!, question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    createProblemOQ(answers: [String!]!, correct_answer: [Int!]!, description: String, difficulty: Int, languages: [LanguageTranslationInput], question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    createProblemset(description: String!, tagIds: [Int!]!, title: String!): Problemset
+    createProgram(learning_track_id: Int, periods: [TimePeriodInput!]!, product_id: ID!, title: String!): Program
+    createResource(description: String, link: String, name: String!, resource_type_id: ID!): Resource
+    createSubscriptionAndStudent(birthdate: Date!, city_residence: String, country_residence: String, email: String!, firstname: String!, guardian_id: ID!, lastname: String!, plan_id: ID!, preference_day: String, school_name: String): SubscriptionModel
+    createTag(name: String!): Tag
+    createTeamAndAddToActivity(activity_id: Int!, student_ids: [Int]!, team_name: String!): [Team]
+    deleteGuardianAccount(comments: String, id: ID!, reason: String): Guardian
+    deletePaymentMethodForGuardian(id: ID!, payment_method_id: Int!): Guardian
+    deleteResource(id: ID!): Resource
+    deleteStudentAccount(id: ID!, reason: String): Student
+    deleteTeacher(id: ID!): Teacher
+    editLearningTrackActivityDetails(description: String, learning_track_activity_id: Int!, name: String): LearningTrackActivity!
+    gradeStudent(module_id: ID!, passed: Boolean, student_id: ID!, suggested_division: DivisionsEnum): Student
+    me: User
+    removeLearningTrackActivity(learning_track_activity_id: Int!): LearningTrackClass!
+    removeLearningTrackClass(learning_track_class_id: Int!): LearningTrackModule!
+    removeLearningTrackModule(learning_track_module_id: Int!): LearningTrackLeague!
+    removeProblem(id: ID!): Problemset
+    removeProblemset(id: ID!): Problemset
+    renameLearningTrackModule(learning_track_module_id: Int!, name: String!): LearningTrackModule!
+    saveProblemset(description: String!, id: ID!, problemIds: [Int!]!, tagIds: [Int!]!, title: String!): Problemset
+    setDefaultPaymentMethodForGuardian(id: ID!, payment_method_id: Int!): Guardian
+    updateGuardian(address_line1: String, address_line2: String, city: String, country: String, id: ID!, payment_type_id: Int, phone_number: String, place_residence: String, post_code: String): Guardian
+    updateProblemCQ(description: String, difficulty: Int, id: Int!, languages: [LanguageTranslationInput], memory_limit: Int, sample_tests: [TestCaseInput], tag_ids: [Int], test_cases: [TestCaseInput], time_limit: Int, title: String, type_id: Int, writer: String): Problem
+    updateProblemFRQ(correct_answer: String!, description: String, difficulty: Int, id: Int!, languages: [LanguageTranslationInput], question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    updateProblemMCQ(answers: [String!]!, correct_answer: [Boolean!]!, description: String, difficulty: Int, id: Int!, languages: [LanguageTranslationInput], question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    updateProblemNQ(correct_answer: Float!, description: String, difficulty: Int, id: Int!, languages: [LanguageTranslationInput], precision: Int!, question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    updateProblemOQ(answers: [String!]!, correct_answer: [Int!]!, description: String, difficulty: Int, id: Int!, languages: [LanguageTranslationInput], question: String!, tag_ids: [Int], title: String!, type_id: Int!, writer: String): Problem
+    updateProgram(id: ID!, learning_track_id: Int!, periods: [TimePeriodInput!]!, product_id: ID!, status_id: Int!, title: String!): Program
+    updateResource(description: String, id: ID!, link: String, name: String!, resource_type_id: ID!): Resource
+    updateStudent(avatar_id: Int, birthdate: Date, city_residence: String, country_residence: String, current_rating: Float, english_level_id: Int, id: ID!, math_level_id: Int, nationality: String, preference_day: String, programming_level_id: Int, scholarship: String, school_name: String, status_id: Int): Student
+    updateSubscriptionPlan(id: ID!, plan_id: Int!): SubscriptionModel
+    updateSubscriptionStatus(id: ID!, status_id: Int!): SubscriptionModel
+    updateTimeSlotToActivity(activity_id: Int!, end_datetime: DateTime!, start_datetime: DateTime!): Activity
+    updateUser(email: String!, firstname: String!, id: ID!, lastname: String!): User
+    userUpdate(admin_tpes: [Int], email: String, firstname: String, id: ID!, lastname: String): User!
+}
+
+"Information about pagination using a Relay style cursor connection."
+type PageInfo {
+    "Number of nodes in the current page."
+    count: Int!
+    "Index of the current page."
+    currentPage: Int!
+    "The cursor to continue paginating forwards."
+    endCursor: String
+    "When paginating forwards, are there more items?"
+    hasNextPage: Boolean!
+    "When paginating backwards, are there more items?"
+    hasPreviousPage: Boolean!
+    "Index of the last available page."
+    lastPage: Int!
+    "The cursor to continue paginating backwards."
+    startCursor: String
+    "Total number of nodes in the paginated connection."
+    total: Int!
+}
+
+"""
+
+########
+##     ##
+##     ##
+########
+##
+##
+##
+"""
+type PaginateInfo {
+    currentPage: Int!
+    from: Int!
+    lastPage: Int!
+    to: Int!
+    total: Int!
+}
+
+"Information about pagination using a fully featured paginator."
+type PaginatorInfo {
+    "Number of items in the current page."
+    count: Int!
+    "Index of the current page."
+    currentPage: Int!
+    "Index of the first item in the current page."
+    firstItem: Int
+    "Are there more pages after this one?"
+    hasMorePages: Boolean!
+    "Index of the last item in the current page."
+    lastItem: Int
+    "Index of the last available page."
+    lastPage: Int!
+    "Number of items per page."
+    perPage: Int!
+    "Number of total available items."
+    total: Int!
+}
+
+type Payment {
+    amount: Float!
+    id: Int!
+    invoice: String
+    invoice_date: DateTime
+    invoice_number: String
+    receipt_url: String
+    status: PaymentStatus
+    status_id: Int
+    students: [PaymentStudent]
+    type: String
+}
+
+type PaymentMethod {
+    id: Int!
+    payment_service_data: PaymentServiceData
+    payment_service_id: Int
+    type: PaymentType
+}
+
+type PaymentServiceData {
+    brand: String
+    exp_month: Int
+    exp_year: Int
+    last4: String
+}
+
+type PaymentStatus {
+    id: ID!
+    name: String!
+}
+
+type PaymentStudent {
+    first_name: String
+    id: ID!
+    last_name: String
+}
+
+type PaymentType {
+    code: String
+    id: ID!
+    name: String!
+}
+
+type Plan {
+    code: String
+    id: ID!
+    name: String!
+    price: Float
+    type: PlanType
+}
+
+type PlanType {
+    id: ID!
+    name: String!
+}
+
+type Problem {
+    content: Json
+    description: String
+    difficulty: Int
+    id: Int!
+    tags: [Tag]
+    title: String!
+    type_id: Int!
+    updated_at: DateTime
+    updater: Member
+    updater_id: Int
+    writer: String
+}
+
+"A paginated list of Problem items."
+type ProblemPaginator {
+    "A list of Problem items."
+    data: [Problem!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type Problemset {
+    description: String
+    id: Int!
+    problems: [Problem]
+    tags: [Tag]
+    title: String!
+    updated_at: DateTime
+}
+
+"A paginated list of Problemset items."
+type ProblemsetPaginator {
+    "A list of Problemset items."
+    data: [Problemset!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type Product {
+    id: ID!
+    name: String
+    programs: [Program]
+}
+
+"A paginated list of Product items."
+type ProductPaginator {
+    "A list of Product items."
+    data: [Product!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type Program {
+    groups_count: Int
+    id: Int!
+    learning_track_id: ID!
+    modules: [Module]
+    periods: [TimePeriod]
+    product: Product
+    students_count: Int
+    title: String!
+}
+
+type ProgramOverview {
+    active_students: Int
+    assignment_completed: Int
+    new_enrolled_students: Int
+    next_module: Int
+}
+
+"A paginated list of Program items."
+type ProgramPaginator {
+    "A list of Program items."
+    data: [Program!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+"Don't delete this is the query root type. You should extent queries in imported graphql files"
+type Query {
+    activitiesFromProgram(
+        activityTypeId: ID,
+        "Limits number of fetched items."
+        first: Int!,
+        futureActivities: Boolean,
+        orderBy: [ActivityOrderInput],
+        "The offset from which items are returned."
+        page: Int,
+        pastActivities: Boolean,
+        programId: ID!
+    ): ActivityPaginator
+    adminTypes: [AdminType]
+    divisions(league_id: Int): [Division!]!
+    divisionsFromLeagueList(league_id: Int): [Division!]!
+    generalActivityList(
+        "Limits number of fetched items."
+        first: Int!,
+        general_activity_type_id: Int,
+        orderBy: [QueryGeneralActivityListOrderByOrderByClause!],
+        "The offset from which items are returned."
+        page: Int,
+        search: String,
+        speaker: String
+    ): GeneralActivityPaginator
+    getActivities: [Activity!]!
+    getActivityTypes: [ActivityType!]!
+    getLearningTrackLeaguesFromLearningTrack(learning_track_id: ID!): [LearningTrackLeague!]!
+    getLearningTrackModulesFromLearningLeagueTrack(learning_track_league_id: ID!): [LearningTrackModule!]!
+    getLecturesFromModule(module_id: Int!): [Lecture!]!
+    getModules(
+        "Limits number of fetched items."
+        first: Int!,
+        "The offset from which items are returned."
+        page: Int
+    ): ModulePaginator
+    getResources: [Resource!]!
+    getTeams: [Team]
+    getTeamsFromActivity(activity_id: ID!): [Team!]!
+    guardian(hasUser: QueryGuardianHasUserWhereHasConditions, id: Int): Guardian
+    guardianOverview(id: Int): GuardianOverview
+    guardians: [Guardian]
+    guardiansOverview(endDatetime: DateTime!, startDatetime: DateTime!): GuardianOverview
+    leagues(program_id: Int): [League!]!
+    leaguesFromProgramList(program_id: Int): [League!]!
+    learningTrack(id: ID!): LearningTrack!
+    learningTrackClasses(
+        "Limits number of fetched items."
+        first: Int!,
+        "The offset from which items are returned."
+        page: Int
+    ): LearningTrackClassPaginator
+    learningTrackModule(id: ID!): LearningTrackModule!
+    learningTracks(
+        "Limits number of fetched items."
+        first: Int!,
+        "The offset from which items are returned."
+        page: Int
+    ): LearningTrackPaginator
+    me: User
+    module(id: ID!): Module!
+    modules(league_id: Int): [Subject!]!
+    modulesFromLeagueList(league_id: Int): [Subject!]!
+    modulesFromProgram(
+        "Limits number of fetched items."
+        first: Int!,
+        orderBy: [ModuleOrderInput],
+        "The offset from which items are returned."
+        page: Int,
+        preferedDay: String,
+        programId: ID!,
+        search: String,
+        startingDate: Date,
+        teacherId: ID
+    ): ModulePaginator
+    newStudentsFromProgram(
+        "Limits number of fetched items."
+        first: Int!,
+        orderBy: [QueryNewStudentsFromProgramOrderByOrderByClause!],
+        "The offset from which items are returned."
+        page: Int,
+        preferedDay: String,
+        programId: ID!,
+        search: String,
+        subscriptionStatusId: Int
+    ): StudentNewFromProgramTypePaginator
+    normalStudentsFromProgram(
+        divisionId: ID,
+        "Limits number of fetched items."
+        first: Int!,
+        leagueId: ID,
+        moduleId: ID,
+        orderBy: [QueryNormalStudentsFromProgramOrderByOrderByClause!],
+        "The offset from which items are returned."
+        page: Int,
+        preferedDay: String,
+        programId: ID!,
+        search: String,
+        startDate: Date,
+        subscriptionStatusId: Int,
+        teacherId: ID
+    ): StudentNormalFromProgramTypePaginator
+    payment(id: ID!): Payment
+    paymentStatusList: [PaymentStatus]
+    paymentTypesList: [PaymentType]
+    plan(id: Int): Plan
+    plans: [Plan]
+    problems(
+        "Limits number of fetched items."
+        first: Int!,
+        languageIds: [Int],
+        orderBy: [ProblemOrderInput],
+        "The offset from which items are returned."
+        page: Int,
+        search: String,
+        tagIds: [Int],
+        typeIds: [Int],
+        writers: [String]
+    ): ProblemPaginator
+    problemsets(
+        "Limits number of fetched items."
+        first: Int!,
+        orderBy: ProblemsetOrderInput,
+        "The offset from which items are returned."
+        page: Int,
+        search: String,
+        tagIds: [Int]
+    ): ProblemsetPaginator
+    product(id: ID!): Program
+    products(
+        "Limits number of fetched items."
+        first: Int!,
+        "The offset from which items are returned."
+        page: Int
+    ): ProductPaginator
+    program(id: ID!): Program
+    programOverview(program_id: ID!): ProgramOverview
+    programs(
+        "Limits number of fetched items."
+        first: Int!,
+        "The offset from which items are returned."
+        page: Int
+    ): ProgramPaginator
+    programsList: [Program!]!
+    repeatingStudentsFromProgram(
+        divisionId: ID,
+        "Limits number of fetched items."
+        first: Int!,
+        leagueId: ID,
+        moduleId: ID,
+        orderBy: [QueryRepeatingStudentsFromProgramOrderByOrderByClause!],
+        "The offset from which items are returned."
+        page: Int,
+        preferedDay: String,
+        programId: ID!,
+        search: String,
+        subscriptionStatusId: Int
+    ): StudentReapitingFromProgramTypePaginator
+    resource(id: ID!): Resource!
+    resources(
+        "Limits number of fetched items."
+        first: Int!,
+        "The offset from which items are returned."
+        page: Int
+    ): ResourcePaginator
+    searchTag(name: String!): [Tag!]!
+    student(hasUser: QueryStudentHasUserWhereHasConditions, id: Int): Student
+    studentActivity(student_id: Int!): [StudentActivityType]
+    studentModuleActivityTypeResults(
+        activity_type_id: ID!,
+        "Limits number of fetched items."
+        first: Int!,
+        module_id: ID!,
+        "The offset from which items are returned."
+        page: Int,
+        student_id: ID!
+    ): StudentModuleActivityTypeResultPaginator
+    studentPerformance(student_id: Int!): StudentPerformanceType
+    studentsFromModule(
+        "Limits number of fetched items."
+        first: Int!,
+        module_id: ID!,
+        orderBy: [QueryStudentsFromModuleOrderByOrderByClause!],
+        "The offset from which items are returned."
+        page: Int,
+        search: String,
+        subscription_status_id: ID
+    ): StudentModulePaginator
+    submissionsFromActivityForStudent(activity_id: ID!, student_id: ID!): [SubmissionOverviewInActivity]
+    subscription(id: ID!): SubscriptionModel
+    subscriptionStatus: [SubscriptionStatus!]!
+    subscriptionStatusList: [SubscriptionStatus!]!
+    subscriptions: [SubscriptionModel]
+    subscriptionsOverview(endDate: Date): SubscriptionsOverview
+    suggestedStudents(division_id: Int, filter_division_id: Int, order: String, order_by: String, passed_status: Int, performance: String, preferred_day: String, selected_division_id: Int!): [SuggestedStudentType!]
+    tags: [Tag!]!
+    teacher(id: ID!): Teacher!
+    teachers: [Teacher!]!
+    user(id: ID!): User!
+    users(
+        "Limits number of fetched items."
+        first: Int!,
+        orderBy: [QueryUsersOrderByOrderByClause!],
+        "The offset from which items are returned."
+        page: Int,
+        roles: [Int],
+        search: String,
+        siteRoles: [Int]
+    ): UserPaginator
+    usersGuardiansList(
+        "Limits number of fetched items."
+        first: Int!,
+        orderBy: [GuardianOrderInput],
+        "The offset from which items are returned."
+        page: Int,
+        payment_type: UsersGuardiansPaymentTypeEnum,
+        search: String,
+        subscription_payment_status: [UsersGuardiansPaymentStatusEnum],
+        subscription_status: [UsersGuardiansSubscriptionStatusEnum]
+    ): GuardianPaginator
+    usersGuardiansPaymentStatusFilterList: [UsersGuardiansPaymentStatus]
+    usersGuardiansPaymentTypeFilterList: [UsersGuardiansPaymentType]
+    usersGuardiansSubscriptionStatusFilterList: [UsersGuardiansSubscriptionStatus!]!
+    usersStudentsListFlat(
+        division_id: Int,
+        "Limits number of fetched items."
+        first: Int!,
+        guardian_type: GuardianTypeInput,
+        league_id: Int,
+        module_id: Int,
+        orderBy: [QueryUsersStudentsListFlatOrderByOrderByClause!],
+        "The offset from which items are returned."
+        page: Int,
+        program_id: Int,
+        search: String,
+        subscription_status_ids: [Int]
+    ): StudentListTypePaginator
+}
+
+"""
+
+########
+##     ##
+##     ##
+########
+##   ##
+##    ##
+##     ##
+"""
+type Resource {
+    description: String
+    id: ID!
+    link: String
+    name: String!
+    resource_type_id: ID!
+}
+
+"A paginated list of Resource items."
+type ResourcePaginator {
+    "A list of Resource items."
+    data: [Resource!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+"Information about pagination using a simple paginator."
+type SimplePaginatorInfo {
+    "Number of items in the current page."
+    count: Int!
+    "Index of the current page."
+    currentPage: Int!
+    "Index of the first item in the current page."
+    firstItem: Int
+    "Are there more pages after this one?"
+    hasMorePages: Boolean!
+    "Index of the last item in the current page."
+    lastItem: Int
+    "Number of items per page."
+    perPage: Int!
+}
+
+"""
+
+######
+##    ##
+##
+######
+##
+##    ##
+######
+"""
+type Student {
+    avatar_id: Int
+    birthdate: Date
+    city_residence: String
+    country_residence: String
+    current_rating: Float
+    english_level_id: Int
+    id: ID!
+    math_level_id: Int
+    nationality: String
+    preference_day: String
+    programming_level_id: Int
+    scholarship: String
+    school_name: String
+    status_id: Int
+    user: User!
+}
+
+type StudentActivityType {
+    activity_id: Int
+    activity_type: String
+    id: Int
+    leaderboard_name: String
+    module_name: String
+    problems: Int
+    program_title: String
+    rank: Int
+    score: Int
+    team: [String]
+}
+
+type StudentAttendanceType {
+    country: String
+    name: String
+    present: Boolean
+    student_id: Int
+}
+
+type StudentContestPerformanceType {
+    delta_score_percent: Float!
+    graded_score: Int!
+    total_score: Int!
+}
+
+type StudentListType {
+    country_residence: String!
+    guardian_email: String!
+    guardian_firstname: String!
+    guardian_id: Int!
+    guardian_lastname: String!
+    id: ID!
+    module_division_id: Int
+    module_end_datetime: DateTime
+    module_id: Int
+    module_name: String
+    module_start_datetime: DateTime
+    program_id: Int!
+    program_title: String!
+    student_email: String
+    student_firstname: String!
+    student_lastname: String!
+    subscription_id: Int!
+    subscription_starts_at: DateTime!
+    subscription_status_id: Int!
+    subscription_status_name: String!
+}
+
+"A paginated list of StudentListType items."
+type StudentListTypePaginator {
+    "A list of StudentListType items."
+    data: [StudentListType!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type StudentModule {
+    attendance_count: Int
+    contests_count: Int
+    final_chalenge_count: Int
+    module: Module
+    module_id: ID!
+    practices_count: Int
+    student: Student
+    student_id: ID!
+}
+
+type StudentModuleActivityTypeResult {
+    activity_id: ID!
+    activity_name: String!
+    activity_total_problems: Int!
+    total_problems_solved: Int!
+}
+
+"A paginated list of StudentModuleActivityTypeResult items."
+type StudentModuleActivityTypeResultPaginator {
+    "A list of StudentModuleActivityTypeResult items."
+    data: [StudentModuleActivityTypeResult!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+"A paginated list of StudentModule items."
+type StudentModulePaginator {
+    "A list of StudentModule items."
+    data: [StudentModule!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type StudentNewFromProgramType {
+    student_firstname: String
+    student_id: ID!
+    student_lastname: String
+    student_nationality: String
+    student_preference_day: String
+    subscription_status_id: String
+}
+
+"A paginated list of StudentNewFromProgramType items."
+type StudentNewFromProgramTypePaginator {
+    "A list of StudentNewFromProgramType items."
+    data: [StudentNewFromProgramType!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type StudentNormalFromProgramType {
+    division_id: ID
+    division_name: String
+    group_name: String
+    league_id: ID
+    module_id: ID
+    module_starttime: DateTime
+    performance: String
+    student_firstname: String
+    student_id: ID!
+    student_lastname: String
+    student_nationality: String
+    student_preference_day: String
+    subscription_status_id: ID
+}
+
+"A paginated list of StudentNormalFromProgramType items."
+type StudentNormalFromProgramTypePaginator {
+    "A list of StudentNormalFromProgramType items."
+    data: [StudentNormalFromProgramType!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type StudentPerformanceType {
+    contest: StudentContestPerformanceType!
+    country_residence: String!
+    final_challenge: StudentContestPerformanceType!
+    img_badge_division: String!
+    img_profile: String!
+    module: Module!
+    practice: StudentContestPerformanceType!
+}
+
+type StudentReapitingFromProgramType {
+    division_id: ID
+    division_name: String
+    group_name: String
+    league_id: ID
+    module_id: ID
+    module_starttime: DateTime
+    performance: String
+    student_firstname: String
+    student_id: ID!
+    student_lastname: String
+    student_nationality: String
+    student_preference_day: String
+    subscription_status_id: ID
+}
+
+"A paginated list of StudentReapitingFromProgramType items."
+type StudentReapitingFromProgramTypePaginator {
+    "A list of StudentReapitingFromProgramType items."
+    data: [StudentReapitingFromProgramType!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type Subject {
+    id: Int!
+    league_id: Int!
+    name: String!
+    number: Int!
+}
+
+type SubmissionOverviewInActivity {
+    amount_submissions: Int!
+    last_score: Int!
+    last_submission_datetime: DateTime
+    problem_id: ID!
+    problem_title: String!
+}
+
+type SubscriptionModel {
+    created_at: DateTime!
+    due_date: DateTime!
+    ends_at: String
+    guardian: Guardian
+    guardian_id: ID!
+    id: ID!
+    payment_detail: SubscriptionPaymentStatus
+    payments: [Payment]
+    plan: PlanType
+    plan_id: Int!
+    price: Float!
+    program: Program!
+    promo_code: String
+    protram_id: Int!
+    starts_at: String
+    status: SubscriptionStatus
+    status_id: Int!
+    student: Student
+    student_id: ID!
+}
+
+type SubscriptionPaymentDetailStatus {
+    id: Int!
+    name: String!
+}
+
+type SubscriptionPaymentStatus {
+    id: Int!
+    name: String!
+}
+
+type SubscriptionStatus {
+    id: Int!
+    name: String!
+}
+
+type SubscriptionsOverview {
+    paidSubscriptions: Int
+    totalSubscriptions: Int
+    unpaidSubscriptions: Int
+    waitingSubscriptions: Int
+}
+
+type SuggestedStudentType {
+    division_id: ID
+    division_name: String
+    firstname: String
+    lastname: String
+    module_id: ID
+    module_name: String
+    nationality: String
+    passed_status: Int
+    performance: String
+    preferred_day: String
+    student_id: ID
+    username: String
+}
+
+type Tag {
+    id: ID!
+    name: String!
+}
+
+type Teacher {
+    calendly_link: String
+    id: ID!
+    modules: [Module]
+    photo: String
+    title: String
+    user: User!
+    user_id: ID!
+}
+
+type Team {
+    id: ID!
+    name: String!
+    students: [Student!]!
+}
+
+type TimePeriod {
+    end_date: Date
+    id: ID!
+    program: Program
+    program_id: ID!
+    start_date: Date
+    time_period_type_id: Int
+}
+
+"""
+
+##     ##
+##     ##
+##     ##
+##     ##
+##     ##
+##     ##
+#######
+"""
+type User {
+    admin_types: [AdminType]
+    email: String
+    firstname: String!
+    id: ID!
+    last_access: DateTime
+    lastname: String!
+    role_id: Int
+}
+
+"A paginated list of User items."
+type UserPaginator {
+    "A list of User items."
+    data: [User!]!
+    "Pagination information about the list of items."
+    paginatorInfo: PaginatorInfo!
+}
+
+type UsersGuardiansPaymentStatus {
+    code: String
+    id: ID!
+    name: String!
+}
+
+type UsersGuardiansPaymentType {
+    code: String
+    id: ID!
+    name: String!
+}
+
+type UsersGuardiansSubscriptionStatus {
+    code: String
+    id: ID!
+    name: String!
+}
+
+enum ActivityOrderColumns {
+    ACTIVITY_STARTDATE
+    ACTIVITY_TITLE
+}
+
+enum AdminTypes {
+    CONTENT_CREATOR
+    COORDINATOR
+    SUPER_ADMIN
+    TEACHER
+    USER_MANAGER
+}
+
+enum DivisionsEnum {
+    A
+    B
+    C
+}
+
+enum GuardianOrderColumns {
+    GUARDIAN_EMAIL
+    GUARDIAN_FIRSTNAME
+    GUARDIAN_LASTNAME
+}
+
+enum GuardianTypes {
+    NOT_PAIRED
+    PAIRED
+}
+
+enum ModuleOrderColumns {
+    NAME
+    STARTING_DATE
+}
+
+"Aggregate functions when ordering by a relation without specifying a column."
+enum OrderByRelationAggregateFunction {
+    "Amount of items."
+    COUNT
+}
+
+"Aggregate functions when ordering by a relation that may specify a column."
+enum OrderByRelationWithColumnAggregateFunction {
+    "Average."
+    AVG
+    "Amount of items."
+    COUNT
+    "Maximum."
+    MAX
+    "Minimum."
+    MIN
+    "Sum."
+    SUM
+}
+
+enum OrderDirection {
+    ASC
+    DESC
+}
+
+enum PaymentTypeEnum {
+    BANK_TRANSFER
+    CARD
+}
+
+enum ProblemOrderColumns {
+    PROBLEM_DATE
+    PROBLEM_TITLE
+}
+
+enum ProblemsetOrderColumns {
+    TITLE
+    UPDATED_AT
+}
+
+"Allowed column names for Query.generalActivityList.orderBy."
+enum QueryGeneralActivityListOrderByColumn {
+    GENERAL_ACTIVITY_TYPE_ID
+    LINK
+    NAME
+    RESOURCES
+    SPEAKER
+}
+
+"Allowed column names for Query.guardian.hasUser."
+enum QueryGuardianHasUserColumn {
+    EMAIL
+    FIRSTNAME
+    LASTNAME
+}
+
+"Allowed column names for Query.newStudentsFromProgram.orderBy."
+enum QueryNewStudentsFromProgramOrderByColumn {
+    STUDENT_EMAIL
+    STUDENT_FIRSTNAME
+    STUDENT_LASTNAME
+}
+
+"Allowed column names for Query.normalStudentsFromProgram.orderBy."
+enum QueryNormalStudentsFromProgramOrderByColumn {
+    STUDENT_EMAIL
+    STUDENT_FIRSTNAME
+    STUDENT_LASTNAME
+}
+
+"Allowed column names for Query.repeatingStudentsFromProgram.orderBy."
+enum QueryRepeatingStudentsFromProgramOrderByColumn {
+    STUDENT_EMAIL
+    STUDENT_FIRSTNAME
+    STUDENT_LASTNAME
+}
+
+"Allowed column names for Query.student.hasUser."
+enum QueryStudentHasUserColumn {
+    EMAIL
+    FIRSTNAME
+    LASTNAME
+}
+
+"Allowed column names for Query.studentsFromModule.orderBy."
+enum QueryStudentsFromModuleOrderByColumn {
+    FIRSTNAME
+    LASTNAME
+}
+
+"Allowed column names for Query.users.orderBy."
+enum QueryUsersOrderByColumn {
+    FIRSTNAME
+    LASTNAME
+}
+
+"Allowed column names for Query.usersStudentsListFlat.orderBy."
+enum QueryUsersStudentsListFlatOrderByColumn {
+    STUDENT_EMAIL
+    STUDENT_FIRSTNAME
+    STUDENT_LASTNAME
+}
+
+"The available SQL operators that are used to filter query results."
+enum SQLOperator {
+    "Whether a value is within a range of values (`BETWEEN`)"
+    BETWEEN
+    "Equal operator (`=`)"
+    EQ
+    "Greater than operator (`>`)"
+    GT
+    "Greater than or equal operator (`>=`)"
+    GTE
+    "Whether a value is within a set of values (`IN`)"
+    IN
+    "Whether a value is not null (`IS NOT NULL`)"
+    IS_NOT_NULL
+    "Whether a value is null (`IS NULL`)"
+    IS_NULL
+    "Simple pattern matching (`LIKE`)"
+    LIKE
+    "Less than operator (`<`)"
+    LT
+    "Less than or equal operator (`<=`)"
+    LTE
+    "Not equal operator (`!=`)"
+    NEQ
+    "Whether a value is not within a range of values (`NOT BETWEEN`)"
+    NOT_BETWEEN
+    "Whether a value is not within a set of values (`NOT IN`)"
+    NOT_IN
+    "Negation of simple pattern matching (`NOT LIKE`)"
+    NOT_LIKE
+}
+
+"Directions for ordering a list of records."
+enum SortOrder {
+    "Sort records in ascending order."
+    ASC
+    "Sort records in descending order."
+    DESC
+}
+
+enum StudentSearchColumns {
+    STUDENT_EMAIL
+    STUDENT_FIRSTNAME
+    STUDENT_LASTNAME
+}
+
+enum SubscriptionPaymentDetailStatusEnum {
+    CANCELED
+    OVERDUE
+    PENDING
+    RECEIPT
+    UPTODATE
+}
+
+enum SubscriptionStatusEnum {
+    ACTIVE
+    COMPLETED
+    INACTIVE
+    SUSPENDED
+    TRIAL
+}
+
+"Specify if you want to include or exclude trashed results from a query."
+enum Trashed {
+    "Only return trashed results."
+    ONLY
+    "Return both trashed and non-trashed results."
+    WITH
+    "Only return non-trashed results."
+    WITHOUT
+}
+
+enum UsersGuardiansPaymentStatusEnum {
+    CANCELED
+    OVERDUE
+    PENDING
+    RECEIPT
+    UPTODATE
+}
+
+enum UsersGuardiansPaymentTypeEnum {
+    BANK_TRANSFER
+    CARD
+}
+
+enum UsersGuardiansSubscriptionStatusEnum {
+    ACTIVE
+    COMPLETED
+    INACTIVE
+    SUSPENDED
+    TRIAL
+}
+
+enum UsersRoles {
+    ADMIN
+    GUARDIAN
+    STUDENT
+    TEACHER
+}
+
+input ActivityOrderInput {
+    column: ActivityOrderColumns
+    order: OrderDirection
+}
+
+input GuardianOrderInput {
+    column: GuardianOrderColumns
+    order: OrderDirection
+}
+
+input GuardianTypeInput {
+    type: GuardianTypes
+}
+
+input LanguageTranslationInput {
+    code: String!
+    translations: [TranslationInput]
+}
+
+input ModuleOrderInput {
+    column: ModuleOrderColumns
+    order: OrderDirection
+}
+
+"Allows ordering a list of records."
+input OrderByClause {
+    "The column that is used for ordering."
+    column: String!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+input ProblemOrderInput {
+    column: ProblemOrderColumns
+    order: OrderDirection
+}
+
+input ProblemsetOrderInput {
+    column: ProblemsetOrderColumns
+    order: OrderDirection
+}
+
+"Order by clause for Query.generalActivityList.orderBy."
+input QueryGeneralActivityListOrderByOrderByClause {
+    "The column that is used for ordering."
+    column: QueryGeneralActivityListOrderByColumn!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+"Dynamic WHERE conditions for the `hasUser` argument on the query `guardian`."
+input QueryGuardianHasUserWhereHasConditions {
+    "A set of conditions that requires all conditions to match."
+    AND: [QueryGuardianHasUserWhereHasConditions!]
+    "Check whether a relation exists. Extra conditions or a minimum amount can be applied."
+    HAS: QueryGuardianHasUserWhereHasConditionsRelation
+    "A set of conditions that requires at least one condition to match."
+    OR: [QueryGuardianHasUserWhereHasConditions!]
+    "The column that is used for the condition."
+    column: QueryGuardianHasUserColumn
+    "The operator that is used for the condition."
+    operator: SQLOperator = EQ
+    "The value that is used for the condition."
+    value: Mixed
+}
+
+"Dynamic HAS conditions for WHERE conditions for the `hasUser` argument on the query `guardian`."
+input QueryGuardianHasUserWhereHasConditionsRelation {
+    "The amount to test."
+    amount: Int = 1
+    "Additional condition logic."
+    condition: QueryGuardianHasUserWhereHasConditions
+    "The comparison operator to test against the amount."
+    operator: SQLOperator = GTE
+    "The relation that is checked."
+    relation: String!
+}
+
+"Order by clause for Query.newStudentsFromProgram.orderBy."
+input QueryNewStudentsFromProgramOrderByOrderByClause {
+    "The column that is used for ordering."
+    column: QueryNewStudentsFromProgramOrderByColumn!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+"Order by clause for Query.normalStudentsFromProgram.orderBy."
+input QueryNormalStudentsFromProgramOrderByOrderByClause {
+    "The column that is used for ordering."
+    column: QueryNormalStudentsFromProgramOrderByColumn!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+"Order by clause for Query.repeatingStudentsFromProgram.orderBy."
+input QueryRepeatingStudentsFromProgramOrderByOrderByClause {
+    "The column that is used for ordering."
+    column: QueryRepeatingStudentsFromProgramOrderByColumn!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+"Dynamic WHERE conditions for the `hasUser` argument on the query `student`."
+input QueryStudentHasUserWhereHasConditions {
+    "A set of conditions that requires all conditions to match."
+    AND: [QueryStudentHasUserWhereHasConditions!]
+    "Check whether a relation exists. Extra conditions or a minimum amount can be applied."
+    HAS: QueryStudentHasUserWhereHasConditionsRelation
+    "A set of conditions that requires at least one condition to match."
+    OR: [QueryStudentHasUserWhereHasConditions!]
+    "The column that is used for the condition."
+    column: QueryStudentHasUserColumn
+    "The operator that is used for the condition."
+    operator: SQLOperator = EQ
+    "The value that is used for the condition."
+    value: Mixed
+}
+
+"Dynamic HAS conditions for WHERE conditions for the `hasUser` argument on the query `student`."
+input QueryStudentHasUserWhereHasConditionsRelation {
+    "The amount to test."
+    amount: Int = 1
+    "Additional condition logic."
+    condition: QueryStudentHasUserWhereHasConditions
+    "The comparison operator to test against the amount."
+    operator: SQLOperator = GTE
+    "The relation that is checked."
+    relation: String!
+}
+
+"Order by clause for Query.studentsFromModule.orderBy."
+input QueryStudentsFromModuleOrderByOrderByClause {
+    "The column that is used for ordering."
+    column: QueryStudentsFromModuleOrderByColumn!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+"Order by clause for Query.users.orderBy."
+input QueryUsersOrderByOrderByClause {
+    "The column that is used for ordering."
+    column: QueryUsersOrderByColumn!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+"Order by clause for Query.usersStudentsListFlat.orderBy."
+input QueryUsersStudentsListFlatOrderByOrderByClause {
+    "The column that is used for ordering."
+    column: QueryUsersStudentsListFlatOrderByColumn!
+    "The direction that is used for ordering."
+    order: SortOrder!
+}
+
+input StudentSearcher {
+    column: StudentSearchColumns!
+    value: String!
+}
+
+input TestCaseInput {
+    input: String
+    output: String
+}
+
+input TimePeriodInput {
+    end_date: Date!
+    start_date: Date!
+    type_id: Int
+}
+
+input TranslationInput {
+    field: String
+    value: String
+}
+
+"Dynamic WHERE conditions for queries."
+input WhereConditions {
+    "A set of conditions that requires all conditions to match."
+    AND: [WhereConditions!]
+    "Check whether a relation exists. Extra conditions or a minimum amount can be applied."
+    HAS: WhereConditionsRelation
+    "A set of conditions that requires at least one condition to match."
+    OR: [WhereConditions!]
+    "The column that is used for the condition."
+    column: String
+    "The operator that is used for the condition."
+    operator: SQLOperator = EQ
+    "The value that is used for the condition."
+    value: Mixed
+}
+
+"Dynamic HAS conditions for WHERE condition queries."
+input WhereConditionsRelation {
+    "The amount to test."
+    amount: Int = 1
+    "Additional condition logic."
+    condition: WhereConditions
+    "The comparison operator to test against the amount."
+    operator: SQLOperator = GTE
+    "The relation that is checked."
+    relation: String!
+}
+
+
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime
+
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date
+
+"""
+Loose type that allows any value. Be careful when passing in large `Int` or `Float` literals,
+as they may not be parsed correctly on the server side. Use `String` literals if you are
+dealing with really large numbers to be on the safe side.
+"""
+scalar Mixed
+
+"Json scalar from the mll-lab/graphql-php-scalars package."
+scalar Json

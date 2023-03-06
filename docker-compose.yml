@@ -1,5 +1,5 @@
 # For more information: https://laravel.com/docs/sail
-version: '3'
+version: '3.9'
 services:
     laravel.test:
         build:
@@ -7,6 +7,8 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
+                WWWUSER: '${WWWUSER}'
+
         image: sail-8.1/app
         extra_hosts:
             - 'host.docker.internal:host-gateway'
@@ -22,10 +24,9 @@ services:
         networks:
             - sail
         depends_on:
-            - mysql
-            - redis
-            - meilisearch
-            - selenium
+            mysql:
+                condition: service_healthy
+
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -42,16 +43,26 @@ services:
         networks:
             - sail
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
             retries: 3
             timeout: 5s
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - '8080:80'
+        environment:
+            PMA_HOST: mysql
+        depends_on:
+            mysql:
+                condition: service_healthy
+        networks:
+            - sail
+
 networks:
     sail:
         driver: bridge
 volumes:
     sailmysql:
-        driver: local
-    sailredis:
-        driver: local
-    sailmeilisearch:
         driver: local

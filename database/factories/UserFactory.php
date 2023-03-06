@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\File;
+use App\Models\Rule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,18 +16,19 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        return [
+        return [//
             'first_name' => $this->faker->firstName(),
-            'last_name'  => $this->faker->lastName(),
-            'position'   => $this->faker->sentence(2),
-            'address'    => $this->faker->sentence(3),
-            'bio'        => $this->faker->sentence(15),
+            'last_name' => $this->faker->lastName(),
+            'position' => $this->faker->sentence(2),
+            'address' => $this->faker->sentence(3),
+            'bio' => $this->faker->sentence(15),
 //            'avatar_id'  => $this->faker->randomElement(File::all()->pluck('id')),
 //            'date_of_birthday' => $this->faker->dateTimeBetween('2015-1-1', '2020-1-1')->format('Y-m-d'),
-            'email'             => $this->faker->unique()->safeEmail(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password'          => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token'    => Str::random(10),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'rule_id' => $this->faker->randomElement(Rule::all()->pluck('id')),
         ];
     }
 

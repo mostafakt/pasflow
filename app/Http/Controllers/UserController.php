@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IndexRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\Users\Collection\UsersResourceCollection;
+use App\Http\Resources\Users\Item\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +15,22 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends ApiController
 {
+    public function __construct()
+    {
+        parent::__construct('users', UsersResourceCollection::class, UserResource::class, User::class);
+    }
+
+    public function getRequests(): array
+    {
+        $requests = [];
+        $requests['index'] = IndexRequest::class;
+        $requests['store'] = Request::class;
+        $requests['update'] = Request::class;
+        $requests['show'] = Request::class;
+        $requests['destroy'] = Request::class;
+        return $requests;
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -24,7 +44,7 @@ class UserController extends ApiController
 
             $token->expires_at = Carbon::now()->addSeconds(60 * 60 * 24 * 7);
             $token->save();
-
+            $user = new UserResource($user);
             // send token
             return response()->json([
                 'user' => $user,
@@ -41,8 +61,9 @@ class UserController extends ApiController
 
     public function register(RegisterRequest $request)
     {
-        $data = $request->only('email', 'first_name', 'last_name', 'position', 'address');
+        $data = $request->only('email', 'first_name', 'last_name', 'position', 'address', 'rule_id');
         $data['password'] = Hash::make($request->input('password'));
+
         $user = new User($data);
         $user->save();
 
@@ -68,6 +89,8 @@ class UserController extends ApiController
         if (Auth::check()) {
             Auth::logout();
         }
+
+
     }
 
     public function profile()
@@ -81,10 +104,10 @@ class UserController extends ApiController
         return response()->json($user);
     }
 
-    public function index()
+    public function store(Request $request): JsonResponse
     {
-        $users = User::all();
-
-        return $this->response($users);
+        return $this->response404();
     }
+
+
 }

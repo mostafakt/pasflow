@@ -16,7 +16,7 @@ class FileFactory extends Factory
     public function definition()
     {
         return [
-            'path'      => Storage::disk('public')->putFile('/', new File($this->faker->image(null, 640, 480, 'business'))),
+            'path'      => $this->faker->sentence(5),//Storage::disk('public')->putFile('/', new File($this->faker->image(null, 640, 480, 'business'))),
             'size'      => $this->faker->numberBetween(10, 100),
             'name'      => $this->faker->sentence(2),
             'extension' => $this->faker->fileExtension(),

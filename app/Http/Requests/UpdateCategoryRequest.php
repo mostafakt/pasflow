@@ -24,6 +24,10 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => 'required|string',
+
+            'interest_id' => 'required',
+
             //
         ];
     }

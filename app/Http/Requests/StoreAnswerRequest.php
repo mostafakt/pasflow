@@ -26,6 +26,7 @@ class StoreAnswerRequest extends FormRequest
         return [
             "question_id" => "required|exists:questions,id",
             "text" => "required|string",
+
         ];
     }
 }

@@ -15,7 +15,7 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
-        return [
+        return [//
             'text'      => $this->faker->sentence($this->faker->numberBetween(25, 50)),
             'answer_id' => $this->faker->randomElement(Answer::all()->pluck('id')),
             'user_id'   => $this->faker->randomElement(User::all()->pluck('id')),
